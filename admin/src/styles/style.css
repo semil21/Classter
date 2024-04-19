@@ -1,0 +1,11 @@
+.form-style {
+  background-color: #ffffff;
+}
+
+.employee-table {
+  overflow-x: scroll;
+}
+
+.table-setting {
+  z-index: -1;
+}
