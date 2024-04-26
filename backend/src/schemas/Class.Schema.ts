@@ -1,6 +1,6 @@
-import mongoost from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const clasSchema = new mongoost.Schema({
+const clasSchema = new mongoose.Schema({
   class: {
     type: String,
   },
@@ -10,5 +10,5 @@ const clasSchema = new mongoost.Schema({
   },
 });
 
-const Class = mongoost.model("Class", clasSchema);
+const Class = mongoose.model("Class", clasSchema);
 export default Class;

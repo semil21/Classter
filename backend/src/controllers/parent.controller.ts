@@ -64,9 +64,73 @@ const deleteParentData = async (req: Request, res: Response) => {
   }
 };
 
+const searchParentsData = async (req: Request, res: Response) => {
+  const { class: studentClass, division, name } = req.body;
+
+  type PipelineStage = {
+    $lookup?: {
+      from: string;
+      localField: string;
+      foreignField: string;
+      as: string;
+    };
+    $addFields?: {
+      student_details: {
+        $first: string;
+      };
+    };
+    $match?: {
+      "student_details.class"?: string;
+      "student_details.division"?: object;
+      "student_details.firstName"?: object;
+    };
+  };
+
+  const pipeline: PipelineStage[] = [
+    {
+      $lookup: {
+        from: "students",
+        localField: "student",
+        foreignField: "_id",
+        as: "student_details",
+      },
+    },
+    {
+      $addFields: {
+        student_details: {
+          $first: "$student_details",
+        },
+      },
+    },
+  ];
+
+  const matchStage: PipelineStage["$match"] = {
+    "student_details.class": studentClass,
+    "student_details.division": { $regex: new RegExp(division, "i") },
+    "student_details.firstName": { $regex: new RegExp(name, "i") },
+  };
+
+  pipeline.push({
+    $match: matchStage,
+  });
+
+  try {
+    const parentsData = await parentSchema.aggregate(pipeline as any[]);
+
+    if (parentsData && parentsData.length > 0) {
+      res.status(200).send({ response: parentsData });
+    } else {
+      res.status(404).send({ response: "No matching data found" });
+    }
+  } catch (error) {
+    res.status(500).send({ response: "Server Error" });
+  }
+};
+
 export default {
   postParentsData,
   getParentsData,
   updateParentData,
   deleteParentData,
+  searchParentsData,
 };

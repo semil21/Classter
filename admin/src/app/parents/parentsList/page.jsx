@@ -1,11 +1,11 @@
 import React from 'react';
 
-import StudentForm from '../../../components/students/studentForm';
+import ParentList from '../../../components/parents/parentList';
 
 function page() {
   return (
     <>
-      <StudentForm />
+      <ParentList />
     </>
   );
 }

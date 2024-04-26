@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import { Input, Textarea } from '@nextui-org/react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
@@ -47,9 +48,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   First Name
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('firstName')}
                 />
               </div>
@@ -57,9 +58,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Last Name
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full"
                   {...register('lastName')}
                 />
               </div>
@@ -68,9 +69,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Birth Date
                 </label>
-                <input
+                <Input
                   type="date"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('dateOfBirth')}
                 />
               </div>
@@ -78,9 +79,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Aadhar Number
                 </label>
-                <input
+                <Input
                   type="number"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('adhaarNumber')}
                 />
               </div>
@@ -89,11 +90,11 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Address
                 </label>
-                <textarea
+                <Textarea
                   rows="5"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-4"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full"
                   {...register('address')}
-                ></textarea>
+                ></Textarea>
               </div>
 
               <div className="col-span-6 sm:col-span-3">
@@ -111,9 +112,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Email
                 </label>
-                <input
+                <Input
                   type="email"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('email')}
                 />
               </div>
@@ -122,9 +123,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Birth Certificate Number
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full"
                   {...register('brthCertiNum')}
                 />
               </div>
@@ -132,9 +133,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Blood Group
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('bloodGroup')}
                 />
               </div>
@@ -143,9 +144,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Previous School
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('previousSchool')}
                 />
               </div>
@@ -153,9 +154,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Previous School Registration Number
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full"
                   {...register('previoudID')}
                 />
               </div>
@@ -164,9 +165,9 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Any Disease
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('anyDisease')}
                 />
               </div>
@@ -174,10 +175,31 @@ function StudentForm() {
                 <label className="text-sm font-medium text-gray-900 block mb-2">
                   Any Notes
                 </label>
-                <input
+                <Input
                   type="text"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
                   {...register('anyNotes')}
+                />
+              </div>
+
+              <div className="col-span-6 sm:col-span-3">
+                <label className="text-sm font-medium text-gray-900 block mb-2">
+                  Standard
+                </label>
+                <Input
+                  type="text"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
+                  {...register('class')}
+                />
+              </div>
+              <div className="col-span-6 sm:col-span-3">
+                <label className="text-sm font-medium text-gray-900 block mb-2">
+                  Division
+                </label>
+                <Input
+                  type="text"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full "
+                  {...register('division')}
                 />
               </div>
             </div>

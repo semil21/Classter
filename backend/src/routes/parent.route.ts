@@ -10,5 +10,6 @@ parentRouter.delete(
   "/delete-parent/:parentId",
   parentController.deleteParentData
 );
+parentRouter.post("/search-parent", parentController.searchParentsData);
 
 export default parentRouter;

@@ -2,41 +2,40 @@
 
 import React, { useEffect, useState } from 'react';
 
-import {
-  Button,
-  ButtonGroup,
-  DatePicker,
-  Input,
-  Radio,
-  RadioGroup,
-  Textarea,
-} from '@nextui-org/react';
+import { Button, Input, Radio, RadioGroup, Textarea } from '@nextui-org/react';
 
 import '../../styles/style.css';
 
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import Select from 'react-select';
 import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 import { useRouter } from 'next/navigation';
 
+import useClassStore from '@/store/classList';
 import useStore from '@/store/teacherData';
 
-function AddEmployee({ id, idEdit }) {
+function AddTeacher({ id, idEdit }) {
+  console.log('--------- if :', id);
   const teacherData = useStore((state) => state.teacherData);
   const editData = teacherData?.filter((teacher) => teacher?._id === id);
 
   const { register, handleSubmit, setValue, watch } = useForm({
     defaultValues: teacherData,
   });
+  const { classData, getClassData } = useClassStore();
 
   const router = useRouter();
 
   const [selectedGender, setSelectedGender] = useState();
+  const [allottedClass, setAllottedClass] = useState();
 
   const onSubmit = async (data) => {
+    data.classAssigned = allottedClass?.value;
+    data.gender = selectedGender;
     if (idEdit === true) {
       data.gender =
         selectedGender === undefined ? editData[0].gender : selectedGender;
@@ -51,7 +50,7 @@ function AddEmployee({ id, idEdit }) {
 
       if (postEditData?.status === 200) {
         updateTeacherToast();
-        router.push('/employees/allEmployees');
+        router.push('/employees/allTeachers');
       }
     } else {
       const submitData = await axios.post(
@@ -67,6 +66,11 @@ function AddEmployee({ id, idEdit }) {
     }
   };
 
+  const genderValue = [
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
+  ];
+
   const saveTeacherToast = () => toast.success('Teacher Added Succesfully.');
   const failedTeacherToast = () => toast.error('Failed to Add Teacher');
   const updateTeacherToast = () =>
@@ -81,6 +85,15 @@ function AddEmployee({ id, idEdit }) {
     return `${year}-${month}-${day}`;
   };
 
+  useEffect(() => {
+    getClassData();
+  }, []);
+  console.log('classData :', classData);
+  const options = classData.map((classItem) => ({
+    value: classItem._id,
+    label: `${classItem.class}-${classItem.division}`,
+  }));
+
   return (
     <>
       <div>
@@ -92,37 +105,31 @@ function AddEmployee({ id, idEdit }) {
         <div className="w-full max-w-md flex flex-col gap-4 ">
           <Input
             type="text"
-            label="Full Name"
+            label="First Name"
             variant="underlined"
             className="mb-4 form-style"
-            {...register('name')}
-            defaultValue={editData ? editData[0]?.name : ''}
+            {...register('firstName')}
+            defaultValue={editData ? editData[0]?.firstName : ''}
           />
 
           <Input
-            type="number"
-            label="Contact Number"
+            type="text"
+            label="Last Name"
             variant="underlined"
-            className="mb-1 form-style"
-            {...register('contact')}
-            defaultValue={editData ? editData[0]?.contact : ''}
+            className="mb-4 form-style"
+            {...register('lastName')}
+            defaultValue={editData ? editData[0]?.lastName : ''}
           />
 
+          {/* <Select options={genderValue} /> */}
+
           <Input
-            type="email"
-            label="Email"
-            variant="underlined"
-            className="mb-1 form-style"
-            {...register('email')}
-            defaultValue={editData ? editData[0]?.email : ''}
+            type="date"
+            {...register('birthDate')}
+            label="Date of Birth"
+            defaultValue={editData ? formatDate(editData[0]?.birthDate) : ''}
           />
-          <Textarea
-            label="Addresss"
-            variant="underlined"
-            className="mb-1 form-style"
-            {...register('address')}
-            defaultValue={editData ? editData[0]?.address : ''}
-          />
+
           <div>
             <RadioGroup
               label="Select Gender"
@@ -146,20 +153,43 @@ function AddEmployee({ id, idEdit }) {
               </Radio>
             </RadioGroup>
           </div>
+
           <Input
-            type="date"
-            {...register('dateOfBirth')}
-            label="Date of Birth"
-            defaultValue={editData ? formatDate(editData[0]?.dateOfBirth) : ''}
-          />
-          <Input
-            type="text"
-            label="Highest Education"
+            type="email"
+            label="Email"
             variant="underlined"
             className="mb-1 form-style"
-            {...register('education')}
-            defaultValue={editData ? editData[0]?.education : ''}
+            {...register('email')}
+            defaultValue={editData ? editData[0]?.email : ''}
           />
+
+          <Input
+            type="number"
+            label="Adhar Number"
+            variant="underlined"
+            className="mb-1 form-style"
+            {...register('aadharNumber')}
+            defaultValue={editData ? editData[0]?.aadharNumber : ''}
+          />
+
+          <Input
+            type="text"
+            label="Contact Number"
+            variant="underlined"
+            className="mb-1 form-style"
+            {...register('contact')}
+            defaultValue={editData ? editData[0]?.contact : ''}
+          />
+
+          <Input
+            type="text"
+            label="Alternate Contact Number"
+            variant="underlined"
+            className="mb-1 form-style"
+            {...register('altenateContact')}
+            defaultValue={editData ? editData[0]?.altenateContact : ''}
+          />
+
           <Input
             type="text"
             label="Blood Group"
@@ -168,47 +198,33 @@ function AddEmployee({ id, idEdit }) {
             {...register('bloodGroup')}
             defaultValue={editData ? editData[0]?.bloodGroup : ''}
           />
+
           <Input
             type="text"
-            label="Nationality"
+            label="Any Disease"
             variant="underlined"
             className="mb-1 form-style"
-            {...register('nationality')}
-            defaultValue={editData ? editData[0]?.nationality : ''}
+            {...register('anyDisease')}
+            defaultValue={editData ? editData[0]?.anyDisease : ''}
           />
+
+          <Textarea
+            label="Addresss"
+            variant="underlined"
+            className="mb-1 form-style"
+            {...register('address')}
+            defaultValue={editData ? editData[0]?.address : ''}
+          />
+
           <Input
             type="text"
-            label="Emergency Contact Name"
+            label="Highest Education"
             variant="underlined"
             className="mb-1 form-style"
-            {...register('emergencyName')}
-            defaultValue={editData ? editData[0]?.emergencyName : ''}
+            {...register('education')}
+            defaultValue={editData ? editData[0]?.education : ''}
           />
-          <Input
-            type="text"
-            label="Relation with Contact Name"
-            variant="underlined"
-            className="mb-1 form-style"
-            {...register('emergencyRelation')}
-            defaultValue={editData ? editData[0]?.emergencyRelation : ''}
-          />
-          <Input
-            type="number"
-            label="Emergency Contact Number"
-            variant="underlined"
-            className="mb-1 form-style"
-            {...register('emergencyContact')}
-            defaultValue={editData ? editData[0]?.emergencyContact : ''}
-          />
-          <Input
-            type="text"
-            label="Role"
-            placeholder="principal | management | teacher  | accountant | other"
-            variant="underlined"
-            className="mb-1 form-style"
-            {...register('role')}
-            defaultValue={editData ? editData[0]?.role : ''}
-          />
+
           <Input
             type="text"
             label="Experience"
@@ -221,9 +237,19 @@ function AddEmployee({ id, idEdit }) {
           <Input
             type="date"
             {...register('joiningDate')}
-            label="Date of Birth"
+            label="Joining Date"
             defaultValue={editData ? formatDate(editData[0]?.joiningDate) : ''}
           />
+
+          <Input
+            type="date"
+            {...register('lastWorkingDay')}
+            label="Last Working Date"
+            defaultValue={
+              editData ? formatDate(editData[0]?.lastWorkingDay) : ''
+            }
+          />
+
           <Input
             type="text"
             label="Monthly Salary"
@@ -231,6 +257,39 @@ function AddEmployee({ id, idEdit }) {
             className="mb-1 form-style"
             {...register('monthlySalary')}
             defaultValue={editData ? editData[0]?.monthlySalary : ''}
+          />
+
+          <Input
+            type="text"
+            label="Nationality"
+            variant="underlined"
+            className="mb-1 form-style"
+            {...register('nationality')}
+            defaultValue={editData ? editData[0]?.nationality : ''}
+          />
+
+          <Input
+            type="text"
+            label="Emergency Contact Name"
+            variant="underlined"
+            className="mb-1 form-style"
+            {...register('emergencyName')}
+            defaultValue={editData ? editData[0]?.emergencyName : ''}
+          />
+
+          <Input
+            type="number"
+            label="Emergency Contact Number"
+            variant="underlined"
+            className="mb-1 form-style"
+            {...register('emergencyContact')}
+            defaultValue={editData ? editData[0]?.emergencyContact : ''}
+          />
+
+          <Select
+            options={options}
+            {...register('classAssigned')}
+            onChange={setAllottedClass}
           />
 
           <Button
@@ -247,4 +306,4 @@ function AddEmployee({ id, idEdit }) {
   );
 }
 
-export default AddEmployee;
+export default AddTeacher;

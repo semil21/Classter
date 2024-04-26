@@ -1,5 +1,9 @@
 import StudentSchema from "../schemas/Student.Schema";
 import { Request, response, Response } from "express";
+interface IAggregateStage {
+  $match?: object;
+  $sort?: object;
+}
 
 const postStudentData = async (req: Request, res: Response) => {
   try {
@@ -50,7 +54,6 @@ const editStudnet = async (req: Request, res: Response) => {
 
 const deleteStudent = async (req: Request, res: Response) => {
   const { studentId } = req.params;
-  console.log("params :", studentId);
   try {
     const deleteRecord = await StudentSchema.findByIdAndDelete({
       _id: studentId,
@@ -64,4 +67,64 @@ const deleteStudent = async (req: Request, res: Response) => {
     res.status(500).send({ response: "Server error" });
   }
 };
-export default { postStudentData, getStuentsData, editStudnet, deleteStudent };
+
+const searchStudent = async (req: Request, res: Response) => {
+  const { className, division } = req.body;
+  try {
+    const aggregationPipeline = [
+      {
+        $match: {
+          class: className,
+          division: division,
+        },
+      },
+    ];
+
+    const filteredData = await StudentSchema.aggregate(aggregationPipeline);
+
+    if (filteredData.length > 0) {
+      res.status(200).send({ response: filteredData });
+    } else {
+      res.status(404).send({ response: "No matching records found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ response: "Server Error" });
+  }
+};
+
+const filterStudent = async (req: Request, res: Response) => {
+  const { classNumber, division: division, firstName, lastName } = req.body;
+
+  try {
+    const studentPipleline = [
+      {
+        $match: {
+          class: classNumber,
+          division: { $regex: new RegExp(division, "i") },
+          firstName: { $regex: new RegExp(firstName, "i") },
+          lastName: { $regex: new RegExp(lastName, "i") },
+        },
+      },
+    ];
+
+    const filterStudentData = await StudentSchema.aggregate(studentPipleline);
+
+    if (filterStudentData) {
+      res.status(200).send({ response: filterStudentData });
+    } else {
+      res.status(404).send({ response: "NO STUDENT FOUND" });
+    }
+  } catch (error) {
+    res.status(500).send({ response: "Server Error" });
+  }
+};
+
+export default {
+  postStudentData,
+  getStuentsData,
+  editStudnet,
+  deleteStudent,
+  searchStudent,
+  filterStudent,
+};

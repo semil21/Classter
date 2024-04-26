@@ -42,6 +42,14 @@ const studentSchema = new mongoose.Schema({
   anyNotes: {
     type: String,
   },
+  class: {
+    type: String,
+    default: 0,
+  },
+  division: {
+    type: String,
+    default: 0,
+  },
 });
 
 const Student = mongoose.model("Student", studentSchema);

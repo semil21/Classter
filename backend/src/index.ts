@@ -15,7 +15,6 @@ connectDB();
 app.use(bodyParser.json());
 app.use(cors());
 app.use((req, res, next) => {
-  console.log(req, "req");
   next();
 });
 
@@ -23,11 +22,14 @@ import teacherRouter from "./routes/teacher.route";
 import studentRouter from "./routes/student.route";
 import parentRouter from "./routes/parent.route";
 import classRouter from "./routes/class.route";
+import feeStructureRouter from "./routes/feeStructure.route";
 import notFound from "./middleware/notFound";
+
 app.use("/teacher", teacherRouter);
 app.use("/student", studentRouter);
 app.use("/parent", parentRouter);
 app.use("/class", classRouter);
+app.use("/feeStructure", feeStructureRouter);
 
 // app.use(notFound);
 

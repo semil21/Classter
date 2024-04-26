@@ -16,7 +16,7 @@ const postTeacher = async (req: Request, res: Response) => {
 
 const getTeacher = async (req: Request, res: Response) => {
   try {
-    const getTeacherData = await teacherSchema.find();
+    const getTeacherData = await teacherSchema.find().populate("classAssigned");
     if (getTeacherData) {
       res.status(200).send({ response: getTeacherData });
     } else {
@@ -30,8 +30,6 @@ const getTeacher = async (req: Request, res: Response) => {
 const editTeacher = async (req: Request, res: Response) => {
   const { teacherId } = req.params;
   const teacherData = req.body;
-  console.log("params :", teacherId);
-  console.log("body :", teacherData);
   try {
     const findTeacher = await teacherSchema.findByIdAndUpdate(
       { _id: teacherId },

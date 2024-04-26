@@ -10,10 +10,14 @@ const parentsSchema = new mongoose.Schema({
   fatherContact: {
     type: Number,
   },
+  fatherAltContact: {
+    type: Number,
+    default: 0,
+  },
   fatherProfession: {
     type: String,
   },
-  fathericome: {
+  fatherIncome: {
     type: String,
   },
   motherName: {
@@ -25,15 +29,20 @@ const parentsSchema = new mongoose.Schema({
   motherContact: {
     type: Number,
   },
+  motherAltContact: {
+    type: Number,
+    default: 0,
+  },
   motherProfession: {
     type: String,
   },
-  mothericome: {
+  motherIncome: {
     type: String,
   },
   student: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student",
+    default: null,
   },
 });
 

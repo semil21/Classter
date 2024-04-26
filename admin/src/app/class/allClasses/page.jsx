@@ -1,11 +1,11 @@
 import React from 'react';
 
-import StudentForm from '../../../components/students/studentForm';
+import AllClasses from '../../../components/classes/allClasses';
 
 function page() {
   return (
     <>
-      <StudentForm />
+      <AllClasses />
     </>
   );
 }

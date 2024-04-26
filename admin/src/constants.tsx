@@ -9,13 +9,23 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
   {
-    title: 'Employees',
-    path: '/employees',
-    icon: <Icon icon="clarity:employee-group-line" width="24" height="24" />,
+    title: 'Classes',
+    path: '/class',
+    icon: <Icon icon="simple-icons:googleclassroom" width="24" height="24" />,
     submenu: true,
     subMenuItems: [
-      { title: 'Add Employee', path: '/employees/addEmployee' },
-      { title: 'All Employees', path: '/employees/allEmployees' },
+      { title: 'Add New Class', path: '/class/newClass' },
+      { title: 'All Classes', path: '/class/allClasses' },
+    ],
+  },
+  {
+    title: 'Teacher',
+    path: '/teacher',
+    icon: <Icon icon="mdi:teacher" width="24" height="24" />,
+    submenu: true,
+    subMenuItems: [
+      { title: 'Add New Teacher', path: '/employees/addTeacher' },
+      { title: 'Teachers List', path: '/employees/allTeachers' },
     ],
   },
   {
@@ -24,16 +34,39 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="ph:student-light" width="24" height="24" />,
     submenu: true,
     subMenuItems: [
-      { title: 'Add Student', path: '/students/addStudent' },
-      { title: 'All Student', path: '/students/allStudent' },
+      { title: 'Add New Student', path: '/students/addStudent' },
+      { title: 'Student List', path: '/students/allStudent' },
+    ],
+  },
+
+  {
+    title: 'Parents',
+    path: '/parents',
+    icon: <Icon icon="raphael:parent" width="24" height="24" />,
+    submenu: true,
+    subMenuItems: [
+      { title: 'Add New Parent', path: '/parents/addNewParent' },
+      { title: 'Parents List', path: '/parents/parentsList' },
     ],
   },
   {
-    title: 'Parents',
-    path: '/messages',
-    icon: <Icon icon="raphael:parent" width="24" height="24" />,
+    title: 'Fee Details',
+    path: '/feeDetail',
+    icon: (
+      <Icon
+        icon="material-symbols:collections-bookmark-sharp"
+        width="24"
+        height="24"
+      />
+    ),
+    submenu: true,
+    subMenuItems: [
+      { title: 'Add Fee Structure', path: '/feeDetail/addFees' },
+      { title: 'Fee Structures ', path: '/feeDetail/feeStructure' },
+    ],
   },
-
+  // icon for fee collection
+  // <Icon icon="fluent-mdl2:payment-card" width="24" height="24" />
   {
     title: 'Settings',
     path: '/settings',

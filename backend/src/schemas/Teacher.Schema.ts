@@ -1,49 +1,59 @@
 import mongoose from "mongoose";
 
 const teacherSchema = new mongoose.Schema({
-  name: {
+  firstName: {
     type: String,
   },
-  contact: {
-    type: Number,
-  },
-  role: {
-    type: String, // principal | management | teacher  | accountant | other
-  },
-  joiningDate: {
+  lastName: {
     type: String,
   },
-  monthlySalary: {
+  birthDate: {
     type: String,
   },
   gender: {
     type: String,
   },
-  experience: {
-    type: String,
-  },
-  nationality: {
-    type: String,
-  },
   email: {
     type: String,
   },
-  education: {
-    type: String,
+  aadharNumber: {
+    type: Number,
+  },
+  contact: {
+    type: Number,
+  },
+  altenateContact: {
+    type: Number,
   },
   bloodGroup: {
     type: String,
   },
-  dateOfBirth: {
+  anyDisease: {
     type: String,
   },
   address: {
     type: String,
   },
-  emergencyName: {
+  education: {
     type: String,
   },
-  emergencyRelation: {
+  experience: {
+    type: String,
+  },
+  joiningDate: {
+    type: String,
+  },
+  lastWorkingDay: {
+    type: String,
+    default: false,
+  },
+  monthlySalary: {
+    type: String,
+  },
+  nationality: {
+    type: String,
+  },
+  emergencyName: {
     type: String,
   },
   emergencyContact: {
@@ -52,6 +62,11 @@ const teacherSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true,
+  },
+  classAssigned: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Class",
+    default: null,
   },
 });
 

@@ -1,4 +1,4 @@
-import AllEmployee from '../../../components/employees/allEmployee';
+import AllTeacher from '../../../components/teachers/allteacher';
 
 import '../../../styles/style.css';
 
@@ -6,7 +6,7 @@ function page() {
   return (
     <>
       <div>
-        <AllEmployee />
+        <AllTeacher isEdit={false} />
       </div>
     </>
   );

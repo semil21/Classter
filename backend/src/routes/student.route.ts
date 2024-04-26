@@ -10,5 +10,7 @@ studentRouter.delete(
   "/delete-student/:studentId",
   StudentController.deleteStudent
 );
+studentRouter.post("/search-student", StudentController.searchStudent);
+studentRouter.post("/filter-student", StudentController.filterStudent);
 
 export default studentRouter;

@@ -1,7 +1,6 @@
 import React from 'react';
 
-import AddEmployee from '@/components/employees/addEmployee';
-import EditEmployee from '@/components/employees/editEmployee';
+import AddEmployee from '@/components/teachers/addTeacher';
 
 // export const EditPage = async ({ params }) => {
 //   const { id } = params;
@@ -10,7 +9,6 @@ import EditEmployee from '@/components/employees/editEmployee';
 
 const page = async (ctx) => {
   const { params } = ctx;
-  console.log('1212', params);
   return (
     <>
       <AddEmployee id={params.id} idEdit={true} />

@@ -26,7 +26,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
-function AllEmployee() {
+function AllTeacher() {
   const router = useRouter();
 
   const setTeacherData = useStore((state) => state.setTeacherData);
@@ -78,6 +78,8 @@ function AllEmployee() {
   };
 
   const deleteTeacherRecord = () => toast.error('Record Deleted Succcessfully');
+
+  console.log('teacherData :', teacherData);
   return (
     <>
       <div>
@@ -88,22 +90,27 @@ function AllEmployee() {
         aria-label="Example static collection table employee-table"
       >
         <TableHeader>
-          <TableColumn>NAME</TableColumn>
-          <TableColumn>CONTACT</TableColumn>
-          <TableColumn>EMAIL</TableColumn>
-          <TableColumn width={450}>ADDRESS</TableColumn>
+          <TableColumn>FIRST NAME</TableColumn>
+          <TableColumn>LAST NAME</TableColumn>
+          <TableColumn>BIRTH DATE</TableColumn>
           <TableColumn>GENDER</TableColumn>
-          <TableColumn>DOB</TableColumn>
-          <TableColumn>EDUCATION</TableColumn>
+          <TableColumn>EMAIL</TableColumn>
+          <TableColumn>AADHAR NUMBER</TableColumn>
+          <TableColumn>CONTACT</TableColumn>
+          <TableColumn>ALTERNATE CONTACT</TableColumn>
           <TableColumn>BLOOD GROUP</TableColumn>
-          <TableColumn>NATIONALITY</TableColumn>
-          <TableColumn>EMERGENCY CONTACT NAME</TableColumn>
-          <TableColumn>EMERGENCE CONTACT RELATION</TableColumn>
-          <TableColumn>EMERGENCE CONTACT NUMBER</TableColumn>
-          <TableColumn>ROLE</TableColumn>
+          <TableColumn>ANY DISEASE</TableColumn>
+          <TableColumn>ADDRESS</TableColumn>
+          <TableColumn>EDUCATION</TableColumn>
           <TableColumn>EXPERIENCE</TableColumn>
           <TableColumn>JOINING DATE</TableColumn>
-          <TableColumn>SALARY</TableColumn>
+          <TableColumn>LAST WORKING DAY</TableColumn>
+          <TableColumn>MONTHLY SALARY</TableColumn>
+          <TableColumn>NATIONALITY</TableColumn>
+          <TableColumn>EMERGENCY CONTACT NAME</TableColumn>
+          <TableColumn>EMERGENCY CONTACT NUMBER</TableColumn>
+          <TableColumn>Active</TableColumn>
+          <TableColumn>CLASS ASSIGNED</TableColumn>
           <TableColumn>EDIT</TableColumn>
           <TableColumn>DELETE</TableColumn>
         </TableHeader>
@@ -111,27 +118,35 @@ function AllEmployee() {
         <TableBody>
           {teacherData?.map((val) => (
             <TableRow key={val?._id}>
-              <TableCell>{val?.name}</TableCell>
-              <TableCell> {val?.contact} </TableCell>
-              <TableCell> {val?.email}</TableCell>
-              <TableCell> {val?.address}</TableCell>
+              <TableCell>{val?.firstName}</TableCell>
+              <TableCell> {val?.lastName} </TableCell>
+              <TableCell> {val?.birthDate}</TableCell>
               <TableCell> {val?.gender}</TableCell>
-              <TableCell> {val?.dateOfBirth.trim(0.9)}</TableCell>
-              <TableCell> {val?.education}</TableCell>
+              <TableCell> {val?.email}</TableCell>
+              <TableCell> {val?.aadharNumber}</TableCell>
+              <TableCell> {val?.contact}</TableCell>
+              <TableCell> {val?.altenateContact}</TableCell>
               <TableCell> {val?.bloodGroup}</TableCell>
-              <TableCell> {val?.nationality}</TableCell>
-              <TableCell> {val?.emergencyName}</TableCell>
-              <TableCell> {val?.emergencyRelation}</TableCell>
-              <TableCell> {val?.emergencyContact}</TableCell>
-              <TableCell> {val?.role}</TableCell>
+              <TableCell> {val?.anyDisease}</TableCell>
+              <TableCell> {val?.address}</TableCell>
+              <TableCell> {val?.education}</TableCell>
               <TableCell> {val?.experience}</TableCell>
               <TableCell> {val?.joiningDate}</TableCell>
+              <TableCell> {val?.lastWorkingDay}</TableCell>
               <TableCell> {val?.monthlySalary}</TableCell>
+              <TableCell> {val?.nationality}</TableCell>
+              <TableCell> {val?.emergencyName}</TableCell>
+              <TableCell> {val?.emergencyContact}</TableCell>
+              <TableCell> {val?.isActive === true ? 'YES' : 'NO'}</TableCell>
+
+              <TableCell>
+                {val?.classAssigned?.class} - {val?.classAssigned?.division}
+              </TableCell>
               <TableCell>
                 <Button
                   color="primary"
                   onClick={() =>
-                    router.push(`/employees/editEmployee/${val?._id}`)
+                    router.push(`/employees/editTeacher/${val?._id}`)
                   }
                 >
                   Edit
@@ -150,4 +165,4 @@ function AllEmployee() {
   );
 }
 
-export default AllEmployee;
+export default AllTeacher;

@@ -1,12 +1,12 @@
 import React from 'react';
 
-import AddEmployee from '../../../components/employees/addEmployee';
+import AddTeacher from '../../../components/teachers/addTeacher';
 
 function page() {
   return (
     <>
       <div>Add new employee page</div>
-      <AddEmployee />
+      <AddTeacher />
     </>
   );
 }
